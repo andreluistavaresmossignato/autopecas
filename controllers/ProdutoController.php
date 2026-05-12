@@ -42,11 +42,13 @@ if ($acao == 'dashboard') {
     $descricao = $_POST['descricao'];
     $preco = $_POST['preco'];
     $estoque = $_POST['quantidade_estoque'];
-
-    if (empty($id)) {
+    
+    if(empty($id)){
+        // Cadastro novo
         $produtoModel->cadastrar($codigo, $nome, $descricao, $preco, $estoque);
     } else {
-        // Atualização não implementada no PDF, mantido conforme instrução original
+        // ✅ Edição: chama o método atualizar
+        $produtoModel->atualizar($id, $codigo, $nome, $descricao, $preco, $estoque);
     }
     header("Location:../controllers/ProdutoController.php?acao=listar");
     exit;

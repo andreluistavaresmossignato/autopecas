@@ -151,4 +151,25 @@ class Produto
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
+        // ✅ Método para atualizar produto no banco
+    public function atualizar($id, $codigo, $nome, $descricao, $preco, $estoque) {
+        $query = "UPDATE produtos SET 
+                    codigo_peca = :codigo,
+                    nome = :nome,
+                    descricao = :descricao,
+                    preco = :preco,
+                    quantidade_estoque = :estoque
+                  WHERE id = :id";
+        
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':id', $id);
+        $stmt->bindParam(':codigo', $codigo);
+        $stmt->bindParam(':nome', $nome);
+        $stmt->bindParam(':descricao', $descricao);
+        $stmt->bindParam(':preco', $preco);
+        $stmt->bindParam(':estoque', $estoque);
+        
+        return $stmt->execute();
+    }
 }
