@@ -12,8 +12,21 @@ $produtoModel = new Produto();
 if ($acao == 'dashboard') {
     require_once '../views/dashboard.php';
 } elseif ($acao == 'listar') {
-    $produtos = $produtoModel->listarTodos();
-    require_once '../views/produto_list.php';
+        // Coleta os filtros do formulário (GET)
+        $filtros = [
+            'nome' => $_GET['nome'] ?? '',
+            'codigo' => $_GET['codigo'] ?? '',
+            'estoque_min' => $_GET['estoque_min'] ?? '',
+            'estoque_max' => $_GET['estoque_max'] ?? '',
+            'preco_min' => $_GET['preco_min'] ?? '',
+            'preco_max' => $_GET['preco_max'] ?? '',
+        ];
+        
+        // Remove filtros vazios para não atrapalhar a query
+        $filtros = array_filter($filtros, function($v) { return $v !== ''; });
+        
+        $produtos = $produtoModel->listarFiltrados($filtros);
+        require_once '../views/produto_list.php';
 } elseif ($acao == 'novo') {
     require_once '../views/produto_form.php';
 } elseif ($acao == 'editar') {
