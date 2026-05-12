@@ -181,6 +181,11 @@
         
         <div class="footer">
             <p>Total de peças exibidas: <strong><?= count($produtos) ?></strong></p>
+            
+            <!-- 📊 Botão para Estatísticas -->
+            <a href="../controllers/ProdutoController.php?acao=estatisticas" class="btn" style="margin-top: 15px; background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);">
+                <i class="bi bi-graph-up-arrow"></i> Ver Estatísticas do Estoque
+            </a>
         </div>
     </div>
 
